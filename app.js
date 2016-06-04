@@ -59,6 +59,23 @@ $('#list').on('click', '.complete-button', function (event){
 	})
 })
 
+var removeItemFromPage = function(itemData) {
+	$(".item[data-id= '" + itemData.id + "']").remove()
+}
+
+$('#list').on('click', '.delete-button', function(event){
+	var item = $(event.target).parent()
+	var itemId = item.attr('data-id')
+
+	var deleteRequest = $.ajax({
+		type: "DELETE",
+		url: "https://listalous.herokuapp.com/lists/njs730/items/" + itemId
+	})
+
+	deleteRequest.done(function(itemData){
+		 removeItemFromPage(itemData)
+	})
+})
 
 
 
